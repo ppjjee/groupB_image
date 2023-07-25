@@ -435,7 +435,7 @@ def image_page1(imgs, cb):
 
 
             else:
-                model_load_state.info(f"**Please select a preferred scenario fist, and click on the image that best represents the scenario.**")
+                model_load_state.info(f"**Please select a preferred scenario first, and click on the image that best represents the scenario.**")
                 
         except Exception as e:
             print("Oops!", e.__class__, "occurred.")
