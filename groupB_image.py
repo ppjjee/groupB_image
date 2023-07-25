@@ -1197,8 +1197,8 @@ def final_page():
 # run the active page
 if st.session_state.active_page == 'Home':
     home()
-elif st.session_state.active_page == 'Page_0':
-    note()
+# elif st.session_state.active_page == 'Page_0':
+#     note()
 elif st.session_state.active_page == 'Page_1':
     image_page1(mood_imgs, CB_Page1)
 elif st.session_state.active_page == 'Page_2':
