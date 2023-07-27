@@ -24,7 +24,7 @@ st.set_page_config(initial_sidebar_state="collapsed")
 # set session_state for change pages
 st.session_state.update(st.session_state)
 if 'active_page' not in st.session_state:
-    st.session_state.['active_page'] = 'Home'
+    st.session_state['active_page'] = 'Home'
     
 
 def save_image_tag_result(save_path, scenario, clicked, selected_tags, added_tags, options, final_aggregated_tags):
