@@ -11,6 +11,7 @@ import uuid
 from itertools import chain
 from sftp import SFTP
 from PIL import Image
+
 hide_menu = """
 <style>
 #MainMenu {
@@ -24,7 +25,7 @@ st.set_page_config(initial_sidebar_state="collapsed")
 # set session_state for change pages
 st.session_state.update(st.session_state)
 if 'active_page' not in st.session_state:
-    st.session_state['active_page'] = 'Home'
+    st.session_state.active_page = 'Home'
     
 
 def save_image_tag_result(save_path, scenario, clicked, selected_tags, added_tags, options, final_aggregated_tags):
@@ -1222,7 +1223,9 @@ def final_page():
     st.title("Thank you for your participation!")
     st.markdown(hide_menu, unsafe_allow_html = True)       
 
-                                                
+if 'active_page' not in st.session_state:
+    st.session_state.active_page = 'Home'
+                                                    
 # run the active page
 if st.session_state.active_page == 'Home':
     home()
