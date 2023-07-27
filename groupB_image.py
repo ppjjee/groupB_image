@@ -11,7 +11,6 @@ import uuid
 from itertools import chain
 from sftp import SFTP
 from PIL import Image
-
 hide_menu = """
 <style>
 #MainMenu {
@@ -433,7 +432,7 @@ def image_page1(imgs, cb):
                 print('Final aggregated tags are:', final_aggregated_tags)
 
                 st.experimental_set_query_params(path=save_path)
-                st.button('NEXT', on_click=cb, args=(save_path, scenario, clicked, selected_tags, options, added_tags, final_aggregated_tags, ))
+                st.button('NEXT', on_click=cb, args=(save_path, scenario, clicked, selected_tags, options, added_tags, final_aggregated_tags))
 
 
             else:
@@ -1223,9 +1222,7 @@ def final_page():
     st.title("Thank you for your participation!")
     st.markdown(hide_menu, unsafe_allow_html = True)       
 
-if 'active_page' not in st.session_state:
-    st.session_state.active_page = 'Home'
-                                                    
+
 # run the active page
 if st.session_state.active_page == 'Home':
     home()
