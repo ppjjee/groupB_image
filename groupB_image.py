@@ -204,7 +204,7 @@ mood_imgs2 = [
 theme_imgs = [
                 'https://github.com/ppjjee/MuFiB/blob/main/images/trailer_adventure_commercial.jpg?raw=true',
                 'https://github.com/ppjjee/MuFiB/blob/main/images/relaxing_calm.jpg?raw=true',
-                'https://github.com/ppjjee/MuFiB/blob/main/images/melodic.jpg?raw=true',
+                'https://github.com/ppjjee/MuFiB/blob/main/images/melodic_positive.jpg?raw=true',
                 'https://github.com/ppjjee/MuFiB/blob/main/images/adventure_meditative.jpg?raw=true',
                 'https://github.com/ppjjee/MuFiB/blob/main/images/melodic_happy_adventure.jpg?raw=true', # 3번째로 이동
                 'https://github.com/ppjjee/MuFiB/blob/main/images/nature.jpg?raw=true', # 3번째로 이동
@@ -962,11 +962,17 @@ def music_retrieval():
         else:
             duplist.append(i) # this method catches the first duplicate entries, and appends them to the list
     print('length of duplicated music:', len(duplist)) 
-
-    random_all = random.choices(duplist, k=5)
-    st.session_state['music_random'] = random_all
-    for r in random_all:
-        print(r) # for debug 
+    
+    if len(duplist) > 5:
+        random_all = random.choices(duplist, k=5)
+        st.session_state['music_random'] = random_all
+        for r in random_all:
+            print(r) # for debug 
+    else:
+        random_all = random.choices(duplist, k=len(duplist))
+        st.session_state['music_random'] = random_all
+        for r in random_all:
+            print(r) # for debug 
         
 
     
