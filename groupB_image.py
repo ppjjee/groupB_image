@@ -55,6 +55,27 @@ def save_image_tag_result(save_path, scenario, clicked, selected_tags, added_tag
             json.dump(data, save_f, ensure_ascii=False, indent=4)
             print("exists, after", data)
 
+def save_music_suitability_result(save_path, satis_result):
+    results_A = {'Satis_result': satis_result}
+    if not os.path.exists(save_path):
+        data = {}
+        data['submits'] = []
+        data['submits'].append(results_A)
+        print("no exists", data)
+        with open(save_path, 'w') as save_f:
+            json.dump(data, save_f, ensure_ascii=False, indent=4)
+
+    else:
+        data = {}
+        with open(save_path, "r") as json_file:
+            data = json.load(json_file)
+        data['submits'].append(results_A)
+        print("exists, before", data)
+
+        with open(save_path, "w") as save_f:
+            json.dump(data, save_f, ensure_ascii=False, indent=4)
+            print("exists, after", data)
+
 # callback functions for change page
 def CB_Home():
     st.session_state.active_page = 'Page_1'
@@ -67,7 +88,8 @@ def CB_Page1(save_path, scenario, clicked, selected_tags, added_tags, options, f
     music_retrieval()
     st.session_state.active_page = 'Page_2'
 
-def CB_Page2():
+def CB_Page2(save_path, satis_result):
+    save_music_suitability_result(save_path, satis_result)
     st.session_state.active_page = 'Page_3'
 
 def CB_Page3(save_path, scenario, clicked, selected_tags, added_tags, options, final_aggregated_tags):
@@ -75,7 +97,8 @@ def CB_Page3(save_path, scenario, clicked, selected_tags, added_tags, options, f
     music_retrieval()
     st.session_state.active_page = 'Page_4'
 
-def CB_Page4():
+def CB_Page4(save_path, satis_result):
+    save_music_suitability_result(save_path, satis_result)
     st.session_state.active_page = 'Page_5'
 
 def CB_Page5(save_path, scenario, clicked, selected_tags, added_tags, options, final_aggregated_tags):
@@ -83,7 +106,8 @@ def CB_Page5(save_path, scenario, clicked, selected_tags, added_tags, options, f
     music_retrieval()
     st.session_state.active_page = 'Page_6'
 
-def CB_Page6():
+def CB_Page6(save_path, satis_result):
+    save_music_suitability_result(save_path, satis_result)
     st.session_state.active_page = 'Page_9'
 
 # def CB_Page7(save_path, clicked, selected_tags, satis_result, change):
@@ -980,17 +1004,17 @@ def music_page(cb):
         st.write('-----')
     
         save_path = st.experimental_get_query_params()['path'][0]
-        with open(save_path, "r") as json_file:
-            results_B = {'Music Satisfaction': satis_result}
-            data = json.load(json_file)
-            data['submits'][-1].update(results_B)
+        # with open(save_path, "r") as json_file:
+        #     results_B = {'Music Satisfaction': satis_result}
+        #     data = json.load(json_file)
+        #     data['submits'][-1].update(results_B)
 
-        with open(save_path, "w") as save_f:
-            json.dump(data, save_f, ensure_ascii=False, indent=4)    
-            print("exists, after", data)
+        # with open(save_path, "w") as save_f:
+        #     json.dump(data, save_f, ensure_ascii=False, indent=4)    
+        #     print("exists, after", data)
         
         st.experimental_set_query_params(path=save_path)
-        st.button('NEXT', on_click=cb)
+        st.button('NEXT', on_click=cb, args=(save_path, satis_result))
 
 
 ## ------------------ for Survey ------------------------ 
