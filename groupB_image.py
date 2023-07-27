@@ -24,10 +24,10 @@ st.set_page_config(initial_sidebar_state="collapsed")
 # set session_state for change pages
 st.session_state.update(st.session_state)
 if 'active_page' not in st.session_state:
-    st.session_state.active_page = 'Home'
+    st.session_state.['active_page'] = 'Home'
     
 
-def save_image_tag_result(save_path, scenario, clicked, selected_tags, added_tags, final_aggregated_tags):
+def save_image_tag_result(save_path, scenario, clicked, selected_tags, added_tags, options, final_aggregated_tags):
     # conv_change = []
     # for i, c in enumerate(change):
     #     target = c
@@ -35,7 +35,7 @@ def save_image_tag_result(save_path, scenario, clicked, selected_tags, added_tag
     #         target = selected_tags[i]
     #     conv_change.append(target)
     # print(conv_change)
-    results_B = {'Scenario': scenario, 'Image': f"{str(int(clicked)+1)}", 'Selected image tags': selected_tags, 'Added tags': added_tags, 'Final aggregated tags': final_aggregated_tags}
+    results_B = {'Scenario': scenario, 'Image': f"{str(int(clicked)+1)}", 'Selected image tags': selected_tags, 'Added tags': added_tags, 'Added image number': options, 'Final aggregated tags': final_aggregated_tags}
     if not os.path.exists(save_path):
         data = {}
         data['submits'] = []
@@ -62,24 +62,24 @@ def CB_Home():
 # def CB_Page0():
 #     st.session_state.active_page = 'Page_1'
 
-def CB_Page1(save_path, scenario, clicked, selected_tags, added_tags, final_aggregated_tags):
-    save_image_tag_result(save_path, scenario, clicked, selected_tags, added_tags, final_aggregated_tags)
+def CB_Page1(save_path, scenario, clicked, selected_tags, added_tags, options, final_aggregated_tags):
+    save_image_tag_result(save_path, scenario, clicked, selected_tags, added_tags, options, final_aggregated_tags)
     music_retrieval()
     st.session_state.active_page = 'Page_2'
 
 def CB_Page2():
     st.session_state.active_page = 'Page_3'
 
-def CB_Page3(save_path, scenario, clicked, selected_tags, added_tags, final_aggregated_tags):
-    save_image_tag_result(save_path, scenario, clicked, selected_tags, added_tags, final_aggregated_tags)
+def CB_Page3(save_path, scenario, clicked, selected_tags, added_tags, options, final_aggregated_tags):
+    save_image_tag_result(save_path, scenario, clicked, selected_tags, added_tags, options, final_aggregated_tags)
     music_retrieval()
     st.session_state.active_page = 'Page_4'
 
 def CB_Page4():
     st.session_state.active_page = 'Page_5'
 
-def CB_Page5(save_path, scenario, clicked, selected_tags, added_tags, final_aggregated_tags):
-    save_image_tag_result(save_path, scenario, clicked, selected_tags, added_tags, final_aggregated_tags)
+def CB_Page5(save_path, scenario, clicked, selected_tags, added_tags, options, final_aggregated_tags):
+    save_image_tag_result(save_path, scenario, clicked, selected_tags, added_tags, options, final_aggregated_tags)
     music_retrieval()
     st.session_state.active_page = 'Page_6'
 
@@ -432,7 +432,7 @@ def image_page1(imgs, cb):
                 print('Final aggregated tags are:', final_aggregated_tags)
 
                 st.experimental_set_query_params(path=save_path)
-                st.button('NEXT', on_click=cb, args=(save_path, scenario, clicked, selected_tags, added_tags, final_aggregated_tags, ))
+                st.button('NEXT', on_click=cb, args=(save_path, scenario, clicked, selected_tags, options, added_tags, final_aggregated_tags, ))
 
 
             else:
@@ -663,7 +663,7 @@ def image_page2(imgs, cb):
                     print('Choose children scenario: changed final aggregated tags:', final_aggregated_tags)
 
                 st.experimental_set_query_params(path=save_path)
-                st.button('NEXT', on_click=cb, args=(save_path, scenario, clicked, selected_tags, added_tags, final_aggregated_tags, ))
+                st.button('NEXT', on_click=cb, args=(save_path, scenario, clicked, selected_tags, added_tags, options, final_aggregated_tags, ))
 
 
             else:
@@ -877,7 +877,7 @@ def image_page3(imgs, cb):
                 print('Final aggregated tags are:', final_aggregated_tags)
 
                 st.experimental_set_query_params(path=save_path)
-                st.button('NEXT', on_click=cb, args=(save_path, scenario, clicked, selected_tags, added_tags, final_aggregated_tags, ))
+                st.button('NEXT', on_click=cb, args=(save_path, scenario, clicked, selected_tags, added_tags, options, final_aggregated_tags, ))
 
 
             else:
