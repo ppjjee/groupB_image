@@ -1004,14 +1004,14 @@ def music_page(cb):
         st.write('-----')
     
         save_path = st.experimental_get_query_params()['path'][0]
-        # with open(save_path, "r") as json_file:
-        #     results_B = {'Music Satisfaction': satis_result}
-        #     data = json.load(json_file)
-        #     data['submits'][-1].update(results_B)
+        with open(save_path, "r") as json_file:
+            results_B = {'Music Satisfaction': satis_result}
+            data = json.load(json_file)
+            data['submits'][-1].update(results_B)
 
-        # with open(save_path, "w") as save_f:
-        #     json.dump(data, save_f, ensure_ascii=False, indent=4)    
-        #     print("exists, after", data)
+        with open(save_path, "w") as save_f:
+            json.dump(data, save_f, ensure_ascii=False, indent=4)    
+            print("exists, after", data)
         
         st.experimental_set_query_params(path=save_path)
         st.button('NEXT', on_click=cb, args=(save_path, satis_result))
